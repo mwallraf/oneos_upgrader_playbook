@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  oneos-upgrader:
+    build:
+      context: .
+      dockerfile: docker/oneos-upgrader/Dockerfile
+      args:
+        http_proxy: ${PROXY:-}
+        https_proxy: ${PROXY:-}
+    container_name: oneos-upgrader
+    volumes:
+      - .:/app
+      - ../oneos_upgrader/:/app/roles/mwallraf.oneos_upgrader/

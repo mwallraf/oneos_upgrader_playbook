@@ -1,0 +1,5 @@
+---
+collections:
+  - community.network
+  - ansible.utils
+  - mwallraf.ekinops

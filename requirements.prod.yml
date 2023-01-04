@@ -1,0 +1,7 @@
+---
+collections:
+  - community.network
+  - ansible.utils
+  - mwallraf.ekinops
+roles:
+  - mwallraf.oneos_upgrader
