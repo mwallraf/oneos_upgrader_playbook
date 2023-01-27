@@ -1,30 +1,68 @@
 - hosts: lbb
-  gather_facts: no
+  gather_facts: False
 
   connection: ansible.netcommon.network_cli
   vars:
     #ansible_network_cli_ssh_type: libssh
     ansible_network_cli_ssh_type: paramiko
+    mail_server:
+    mail_port:
+    mail_recipients: []
+    send_mail: False
 
-  roles:
-  - { role: mwallraf.oneos_upgrader }
+  # roles:
+  #   - { role: mwallraf.oneos_upgrader }
+
+  tasks:
+    - block:
+      - include_role:
+          name: "mwallraf.oneos_upgrader"
+        tags:
+          - always
+      rescue:
+        - ansible.builtin.set_fact:
+            upgrade_process_failed: "{{ true }}"
+          tags:
+            - always
 
   post_tasks:
-    - name: "DEBUG > output all variables"
-      debug:
-        msg: "{{ ansible_play_hosts | map('extract', hostvars) | list }}"
-      run_once: yes
-      delegate_to: localhost
-      tags:
-        - always
+    - block:
 
-    - name: REPORT > save report to a file
-      ansible.builtin.template:
-        src: "~/.ansible/roles/mwallraf.oneos_upgrader/templates/report_overview.j2"
-        dest: report.txt
-        #owner: bin
-        #group: wheel
-      run_once: yes
-      tags:
-        - always
+      - name: "DEBUG > output all variables"
+        debug:
+          msg: "{{ ansible_play_hosts | map('extract', hostvars) | list }}"
+        run_once: True
+        delegate_to: localhost
+        tags:
+          - always
+
+      always:
+        - name: REPORT > save report to a file
+          ansible.builtin.template:
+            src: "~/.ansible/roles/mwallraf.oneos_upgrader/templates/report_overview.j2"
+            dest: report.txt
+            #owner: bin
+            #group: wheel
+          run_once: True
+          tags:
+            - always
+
+        - name: REPORT > send mail
+          community.general.mail:
+            host: "{{ mail_server }}"
+            port: "{{ mail_port }}"
+            subject: "ONEOS UPGRADE REPORT"
+            body: "{{ lookup('template', '~/.ansible/roles/mwallraf.oneos_upgrader/templates/report_overview.j2') }}"
+            from: "semaphore@orange.com"
+            to: "{{ mail_recipients }}"
+            headers:
+              - "Reply-To=<do-not-reply@semaphore>"
+            charset: us-ascii
+          delegate_to: localhost
+          run_once: True
+          tags:
+            - always
+          when: mail_recipients and send_mail|default('false')|bool is true
+
+      
 
