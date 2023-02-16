@@ -38,7 +38,7 @@
         - name: REPORT > save report to a file
           ansible.builtin.template:
             src: "~/.ansible/roles/mwallraf.oneos_upgrader/templates/report_overview.j2"
-            dest: report.txt
+            dest: report.csv
             #owner: bin
             #group: wheel
           run_once: True
@@ -53,7 +53,7 @@
             body: "{{ lookup('template', '~/.ansible/roles/mwallraf.oneos_upgrader/templates/report_overview.j2') }}"
             from: "semaphore@orange.com"
             to: "{{ mail_recipients }}"
-            attach: "report.txt"
+            attach: "report.csv"
             headers:
               - "Reply-To=<do-not-reply@semaphore>"
             charset: us-ascii
