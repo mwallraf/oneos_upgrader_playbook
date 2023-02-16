@@ -48,7 +48,7 @@
         - name: REPORT > send mail
           community.general.mail:
             host: "{{ mail_server }}"
-            port: "{{ mail_port }}"
+            port: "{{ mail_port|default('25') }}"
             subject: "ONEOS UPGRADE REPORT"
             body: "{{ lookup('template', '~/.ansible/roles/mwallraf.oneos_upgrader/templates/report_overview.j2') }}"
             from: "semaphore@orange.com"
@@ -56,7 +56,7 @@
             headers:
               - "Reply-To=<do-not-reply@semaphore>"
             charset: us-ascii
-          delegate_to: localhost
+          #delegate_to: localhost
           run_once: True
           tags:
             - always
