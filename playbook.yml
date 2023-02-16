@@ -10,9 +10,7 @@
     mail_recipients: []
     send_mail: False
 
-  # roles:
-  #   - { role: mwallraf.oneos_upgrader }
-
+  # use include_role task instead of roles because we want to be sure the post_tasks will run
   tasks:
     - block:
       - include_role:

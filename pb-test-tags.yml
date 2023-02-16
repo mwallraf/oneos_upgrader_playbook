@@ -1,0 +1,10 @@
+- hosts: lbb
+  gather_facts: no
+
+  connection: ansible.netcommon.network_cli
+  vars:
+    #ansible_network_cli_ssh_type: libssh
+    ansible_network_cli_ssh_type: paramiko
+
+  roles:
+    - { role: mwallraf.oneos_upgrader }

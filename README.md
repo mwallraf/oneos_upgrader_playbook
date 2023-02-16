@@ -2,9 +2,25 @@
 
 This is a playbook that uses the mwallraf/oneos_upgrader role. This role is available on Ansible Galaxy and takes care of upgrading ONEOS5 + ONEOS6 network devices.
 
+## REQUIREMENTS
+
+This playbook requires the ansible role 'mwallraf.oneos_upgrader' to be installed. This can be installed using ansible-galaxy:
+
+> ansible-galaxy role install mwallraf.oneos_upgrader
+
 ## RUN THE PLAYBOOK
 
+Generate a report:
 
+> ansible-playbook -i hosts playbook.yml --tags report
+
+Stage a router:
+
+> ansible-playbook -i hosts playbook.yml --tags report,staging
+
+Upgrade a router:
+
+> ansible-playbook -i hosts playbook.yml --tags report,upgrade
 
 ## DOCKER DEVELOPMENT
 

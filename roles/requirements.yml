@@ -1,7 +1,8 @@
 ---
 collections:
-  - community.network
   - ansible.utils
+  - community.general
+  - community.docker
   - mwallraf.ekinops
 
 roles:

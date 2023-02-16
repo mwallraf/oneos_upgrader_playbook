@@ -8,6 +8,9 @@ ansible_network_os=mwallraf.ekinops.oneos
 ansible_user=<username>
 ansible_password=<password>
 
+# use a proxy ssh server
+# ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p <proxy server>"'
+
 [lbb:children]
 lbb154
 lbb140
@@ -16,6 +19,7 @@ lbb140
 
 
 [lbb154]
+1.1.1.1 hostname=lab_lbb154
 
 [lbb154:vars]
 wanted_os_version=OneOS-pCPE-ARM_pi1-6.8.4
@@ -28,6 +32,7 @@ software_path=/software/LBB15x
 
 
 [lbb140]
+2.2.2.2 hostname=lab_lbb140
 
 [lbb140:vars]
 wanted_os_version=ONEOS16-MONO_FT-V5.2R2E7_HA1
