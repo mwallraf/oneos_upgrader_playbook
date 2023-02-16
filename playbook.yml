@@ -53,6 +53,7 @@
             body: "{{ lookup('template', '~/.ansible/roles/mwallraf.oneos_upgrader/templates/report_overview.j2') }}"
             from: "semaphore@orange.com"
             to: "{{ mail_recipients }}"
+            attach: "report.txt"
             headers:
               - "Reply-To=<do-not-reply@semaphore>"
             charset: us-ascii
