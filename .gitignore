@@ -5,3 +5,4 @@ report.txt
 test-pylibssh.py
 test/
 .env
+report.csv
