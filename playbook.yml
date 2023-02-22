@@ -32,7 +32,7 @@
         run_once: True
         delegate_to: localhost
         tags:
-          - always
+          - debug
 
       always:
         - name: REPORT > save report to a file
