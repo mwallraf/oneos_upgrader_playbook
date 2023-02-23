@@ -1,9 +1,9 @@
 ---
 collections:
-  - community.general
   - mwallraf.ekinops
   - community.docker
   - ansible.utils
+  - community.general
 
 roles:
   - name: mwallraf.oneos_upgrader
