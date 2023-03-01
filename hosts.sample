@@ -37,5 +37,7 @@ software_path=/software/LBB15x
 [lbb140:vars]
 wanted_os_version=ONEOS16-MONO_FT-V5.2R2E7_HA1
 wanted_os_file=ONEOS16-MONO_FT-V5.2R2E7_HA1.ZZZ
+wanted_boot_version=
+wanted_boot_file=
 software_path=/software/LBB140
 
