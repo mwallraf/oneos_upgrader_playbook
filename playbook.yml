@@ -49,7 +49,7 @@
           community.general.mail:
             host: "{{ mail_server }}"
             port: "{{ mail_port|default('25') }}"
-            subject: "ONEOS UPGRADE REPORT"
+            subject: "{{ '[UPGRADE] ' if 'upgrade' in ansible_run_tags else '' }}{{ '[STAGING] ' if 'staging' in ansible_run_tags else '' }}ONEOS UPGRADE REPORT"
             body: "{{ lookup('template', '~/.ansible/roles/mwallraf.oneos_upgrader/templates/report_overview.j2') }}"
             from: "semaphore@orange.com"
             to: "{{ mail_recipients }}"
